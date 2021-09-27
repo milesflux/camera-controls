@@ -601,7 +601,15 @@ export class CameraControls extends EventDispatcher {
 
 					case ACTION.TRUCK: {
 
-						this._truckInternal( event.deltaX, event.deltaY, false );
+						if (event.ctrlKey) {
+							if (isOrthographicCamera(this._camera)) {
+								this._zoomInternal( - delta, x, y );
+							} else {
+								this._dollyInternal( - delta, x, y );
+							}
+						} else {
+							this._truckInternal( event.deltaX, event.deltaY, false );
+						}
 						break;
 
 					}

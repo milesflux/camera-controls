@@ -546,7 +546,17 @@
 	                        break;
 	                    }
 	                    case ACTION.TRUCK: {
-	                        _this._truckInternal(event.deltaX, event.deltaY, false);
+	                        if (event.ctrlKey) {
+	                            if (isOrthographicCamera(_this._camera)) {
+	                                _this._zoomInternal(-delta, x, y);
+	                            }
+	                            else {
+	                                _this._dollyInternal(-delta, x, y);
+	                            }
+	                        }
+	                        else {
+	                            _this._truckInternal(event.deltaX, event.deltaY, false);
+	                        }
 	                        break;
 	                    }
 	                    case ACTION.OFFSET: {
