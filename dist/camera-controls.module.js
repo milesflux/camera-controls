@@ -534,6 +534,7 @@ var CameraControls = (function (_super) {
                 var delta = (event.deltaMode === 1) ? event.deltaY / deltaYFactor : event.deltaY / (deltaYFactor * 10);
                 var x = _this.dollyToCursor ? (event.clientX - _this._elementRect.x) / _this._elementRect.z * 2 - 1 : 0;
                 var y = _this.dollyToCursor ? (event.clientY - _this._elementRect.y) / _this._elementRect.w * -2 + 1 : 0;
+                console.log("WHEEL EVENT", event);
                 switch (_this.mouseButtons.wheel) {
                     case ACTION.ROTATE: {
                         _this._rotateInternal(event.deltaX, event.deltaY);
