@@ -16,6 +16,7 @@ export declare class CameraControls extends EventDispatcher {
     minZoom: number;
     maxZoom: number;
     dampingFactor: number;
+    disableTransitions: boolean;
     draggingDampingFactor: number;
     azimuthRotateSpeed: number;
     polarRotateSpeed: number;
