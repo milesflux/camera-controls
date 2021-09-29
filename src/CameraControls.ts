@@ -101,7 +101,6 @@ export class CameraControls extends EventDispatcher {
 	maxZoom = Infinity;
 
 	dampingFactor = 0.05;
-	disableTransitions = false;
 	draggingDampingFactor = 0.25;
 	azimuthRotateSpeed = 1.0;
 	polarRotateSpeed = 1.0;
@@ -602,8 +601,8 @@ export class CameraControls extends EventDispatcher {
 
 					case ACTION.TRUCK: {
 
-						if ( event.ctrlKey ) {
-							if ( isOrthographicCamera( this._camera ) ) {
+						if (event.ctrlKey) {
+							if (isOrthographicCamera(this._camera)) {
 								this._zoomInternal( - delta, x, y );
 							} else {
 								this._dollyInternal( - delta, x, y );
@@ -1959,8 +1958,8 @@ export class CameraControls extends EventDispatcher {
 						this._focalOffsetEnd.z,
 						true,
 					) :
-					this.truck( truckX, 0, ! this.disableTransitions );
-				this.forward( - pedestalY, ! this.disableTransitions );
+					this.truck( truckX, 0, true );
+				this.forward( - pedestalY, true );
 
 			} else {
 
@@ -1971,7 +1970,7 @@ export class CameraControls extends EventDispatcher {
 						this._focalOffsetEnd.z,
 						true,
 					) :
-					this.truck( truckX, pedestalY, ! this.disableTransitions );
+					this.truck( truckX, pedestalY, true );
 
 			}
 
@@ -1982,8 +1981,8 @@ export class CameraControls extends EventDispatcher {
 			const truckX    = deltaX * ( camera.right - camera.left   ) / camera.zoom / this._elementRect.z;
 			const pedestalY = deltaY * ( camera.top   - camera.bottom ) / camera.zoom / this._elementRect.w;
 			dragToOffset ?
-				this.setFocalOffset( this._focalOffsetEnd.x + truckX, this._focalOffsetEnd.y + pedestalY, this._focalOffsetEnd.z, ! this.disableTransitions ) :
-				this.truck( truckX, pedestalY, ! this.disableTransitions );
+				this.setFocalOffset( this._focalOffsetEnd.x + truckX, this._focalOffsetEnd.y + pedestalY, this._focalOffsetEnd.z, true ) :
+				this.truck( truckX, pedestalY, true );
 
 		}
 
@@ -1993,7 +1992,7 @@ export class CameraControls extends EventDispatcher {
 
 		const theta = PI_2 * this.azimuthRotateSpeed * deltaX / this._elementRect.w; // divide by *height* to refer the resolution
 		const phi   = PI_2 * this.polarRotateSpeed   * deltaY / this._elementRect.w;
-		this.rotate( theta, phi, ! this.disableTransitions );
+		this.rotate( theta, phi, true );
 
 	};
 

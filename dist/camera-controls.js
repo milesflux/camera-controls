@@ -204,7 +204,6 @@
 	        _this.minZoom = 0.01;
 	        _this.maxZoom = Infinity;
 	        _this.dampingFactor = 0.05;
-	        _this.disableTransitions = false;
 	        _this.draggingDampingFactor = 0.25;
 	        _this.azimuthRotateSpeed = 1.0;
 	        _this.polarRotateSpeed = 1.0;
@@ -236,13 +235,13 @@
 	                if (_this.verticalDragToForward) {
 	                    dragToOffset ?
 	                        _this.setFocalOffset(_this._focalOffsetEnd.x + truckX, _this._focalOffsetEnd.y, _this._focalOffsetEnd.z, true) :
-	                        _this.truck(truckX, 0, !_this.disableTransitions);
-	                    _this.forward(-pedestalY, !_this.disableTransitions);
+	                        _this.truck(truckX, 0, true);
+	                    _this.forward(-pedestalY, true);
 	                }
 	                else {
 	                    dragToOffset ?
 	                        _this.setFocalOffset(_this._focalOffsetEnd.x + truckX, _this._focalOffsetEnd.y + pedestalY, _this._focalOffsetEnd.z, true) :
-	                        _this.truck(truckX, pedestalY, !_this.disableTransitions);
+	                        _this.truck(truckX, pedestalY, true);
 	                }
 	            }
 	            else if (isOrthographicCamera(_this._camera)) {
@@ -250,14 +249,14 @@
 	                var truckX = deltaX * (camera.right - camera.left) / camera.zoom / _this._elementRect.z;
 	                var pedestalY = deltaY * (camera.top - camera.bottom) / camera.zoom / _this._elementRect.w;
 	                dragToOffset ?
-	                    _this.setFocalOffset(_this._focalOffsetEnd.x + truckX, _this._focalOffsetEnd.y + pedestalY, _this._focalOffsetEnd.z, !_this.disableTransitions) :
-	                    _this.truck(truckX, pedestalY, !_this.disableTransitions);
+	                    _this.setFocalOffset(_this._focalOffsetEnd.x + truckX, _this._focalOffsetEnd.y + pedestalY, _this._focalOffsetEnd.z, true) :
+	                    _this.truck(truckX, pedestalY, true);
 	            }
 	        };
 	        _this._rotateInternal = function (deltaX, deltaY) {
 	            var theta = PI_2 * _this.azimuthRotateSpeed * deltaX / _this._elementRect.w;
 	            var phi = PI_2 * _this.polarRotateSpeed * deltaY / _this._elementRect.w;
-	            _this.rotate(theta, phi, !_this.disableTransitions);
+	            _this.rotate(theta, phi, true);
 	        };
 	        _this._dollyInternal = function (delta, x, y) {
 	            var dollyScale = Math.pow(0.95, -delta * _this.dollySpeed);
